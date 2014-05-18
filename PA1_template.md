@@ -138,7 +138,7 @@ Next step in analysis is to compare activity patterns between weekdays and weeke
 After that we will plot daily activity patterns for both groups and compare results.
 
 ```r
-activityImputed$day <- as.numeric(factor(weekdays(strptime(activityImputed$date, 
+activityImputed$date <- as.numeric(factor(weekdays(strptime(activityImputed$date, 
     format = "%Y-%m-%d"))))
 days <- function(x) {
     w <- logical(length(x))
@@ -155,18 +155,20 @@ days <- function(x) {
     levels(w) <- list(Weekend = "TRUE", Weekdays = "FALSE")
     return(w)
 }
-activityImputed$Day <- days(activityImputed$day)
+activityImputed$date <- days(activityImputed$date)
+library(data.table)
+```
 
-weekends <- subset(activityImputed, activityImputed$Day == "Weekend")
-weekdays <- subset(activityImputed, activityImputed$Day == "Weekdays")
-b <- tapply(weekends$steps, weekends$interval, mean)
-d <- tapply(weekdays$steps, weekdays$interval, mean)
+```
+## Warning: package 'data.table' was built under R version 3.0.3
+```
 
-par(mfrow = c(2, 1))
-plot(b, type = "l", xlab = "Intervals", ylab = "Average steps", col = "red", 
-    main = "Weekends")
-plot(d, type = "l", xlab = "Intervals", ylab = "Average steps", main = "Weekdays", 
-    col = "blue")
+```r
+activityImputed <- as.data.table(activityImputed)
+activityImputed <- activityImputed[, mean(steps), by = list(interval, date)]
+library(lattice)
+xyplot(V1 ~ interval | date, data = activityImputed, type = "l", layout = c(1, 
+    2), ylab = "Average steps")
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
