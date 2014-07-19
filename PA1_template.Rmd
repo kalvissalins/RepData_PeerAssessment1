@@ -1,4 +1,5 @@
-# Reproducible Research: Peer Assessment 1
+Reproducible Research: Peer Assessment 1
+========================================================
 
 This research uses data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
@@ -100,7 +101,7 @@ xyplot(V1~interval|date,data=activityImputed,type="l",layout=c(1,2),ylab="Averag
 Plots clearly illustrate that weekend activity is higher, although follows the same pattern as weekdays. Activity peaks occur at the same time in both cases and shape of graph is similar.  
 
 ## Main conclusions.
-Performed analysis allows us to make following main convlusions:  
+Performed analysis allows us to make following main conclusions:  
 1. Typical daily activity is around 10 000 steps.  
 2. Peak activity occurs at the morning around 8:40 with other smaller activity peaks later in the day.  
 3. Activity is higher in the weekend although it follows similar patterns as in weekdays.
